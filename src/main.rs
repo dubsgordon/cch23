@@ -1,5 +1,5 @@
 mod day;
-use axum::{extract::Path, http::StatusCode, routing::get, Router};
+use axum::{http::StatusCode, routing::{get, post}, Router};
 
 async fn hello_world() -> &'static str {
     "Hello, world!"
@@ -14,7 +14,8 @@ async fn main() -> shuttle_axum::ShuttleAxum {
     let router = Router::new()
         .route("/", get(hello_world))
         .route("/-1/error", get(ise))
-        .route("/1/*params", get(day::one::compute));
+        .route("/1/*params", get(day::one::compute))
+        .route("/4/strength", post(day::four::strength::compute));
 
     Ok(router.into())
 }
