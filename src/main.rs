@@ -15,7 +15,8 @@ async fn main() -> shuttle_axum::ShuttleAxum {
         .route("/", get(hello_world))
         .route("/-1/error", get(ise))
         .route("/1/*params", get(day::one::compute))
-        .route("/4/strength", post(day::four::strength::compute));
+        .route("/4/strength", post(day::four::strength::compute))
+        .route("/5", post(day::five::compute));
 
     Ok(router.into())
 }
